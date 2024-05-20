@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+header {
+  height: 40px;
+  background: #0A34A9;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header > nav {
+  width: 100%;
+  height: 100%;
+}
+
+header > nav > ul {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+header > nav > ul > li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  list-style-type: none;
+  width: 12%;
+}
+
+header > nav > ul > li > a {
+  text-decoration: none;
+  color: whitesmoke;
+  width: 100%;
+}
+
+header > nav > ul > li > a:hover {
+  color: whitesmoke;
+  font-weight: 700;
+}
+
+.canvases {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+canvas {
+  margin: 20px 0px;
+  border: solid 1px black;
+}
+
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  flex-direction: column;
+  background-color: #0A34A9;
+  z-index: 1;
+}
+
+.dropdown_menu > li {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  list-style-type: none;
+  width: 100%;
+}
+
+.dropdown_menu > li:hover{
+  font-weight: 700;
+}
+
+.dropdown_menu > li > a {
+  text-decoration: none;
+  color: whitesmoke;
+  width: 100%;
+  height: 30px;
+  background-color: #0A34A9;
+}
+
+.menu_hover:hover .dropdown_menu {
+  display: flex;
+}
+
+
+.clock {
+  position: relative;
+  margin-top: 15px;
+  margin-left: 15px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 2px solid #000;
+}
+
+.hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 100%;
+  background-color: #000;
+}
+
+.hour-hand {
+  width: 4px;
+  height: 60px;
+  transform: translate(-50%, -100%) rotate(0deg);
+}
+
+.minute-hand {
+  width: 2px;
+  height: 80px;
+  transform: translate(-50%, -100%) rotate(0deg);
+}
+
+.second-hand {
+  width: 1px;
+  height: 90px;
+  transform: translate(-50%, -100%) rotate(0deg);
+  background-color: red; /* Now red color for seconds hand */
+}
+
+.clock-face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: bold;
+}
