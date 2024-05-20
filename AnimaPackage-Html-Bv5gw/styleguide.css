@@ -1,0 +1,25 @@
+:root {
+  --primaryprimary-50: rgba(251, 252, 255, 1);
+  --primaryprimary-100: rgba(240, 244, 253, 1);
+  --primaryprimary-200: rgba(222, 230, 251, 1);
+  --primaryprimary-300: rgba(197, 210, 247, 1);
+  --primaryprimary-400: rgba(164, 185, 243, 1);
+  --primaryprimary-500: rgba(124, 154, 237, 1);
+  --primaryprimary-600: rgba(76, 117, 231, 1);
+  --primaryprimary-700: rgba(29, 79, 215, 1);
+  --primaryprimary-800: rgba(16, 44, 121, 1);
+  --primaryprimary-900: rgba(9, 23, 64, 1);
+  --primaryprimary-950: rgba(6, 16, 45, 1);
+  --graygray-50: rgba(252, 252, 253, 1);
+  --graygray-100: rgba(241, 243, 246, 1);
+  --graygray-200: rgba(224, 228, 234, 1);
+  --graygray-300: rgba(200, 206, 217, 1);
+  --graygray-400: rgba(168, 179, 196, 1);
+  --graygray-500: rgba(130, 146, 170, 1);
+  --graygray-600: rgba(91, 107, 134, 1);
+  --graygray-700: rgba(56, 66, 82, 1);
+  --graygray-800: rgba(36, 43, 53, 1);
+  --graygray-900: rgba(25, 29, 36, 1);
+  --graygray-950: rgba(21, 24, 30, 1);
+  --collection-1-boolean: none;
+}
