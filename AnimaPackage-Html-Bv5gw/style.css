@@ -35,7 +35,7 @@
 
 .frame .wiadomoci-ze-wiata {
   position: absolute;
-  width: 507px;
+  width: 510px;
   height: 29px;
   top: 36px;
   left: 1228px;
@@ -75,16 +75,24 @@
 
 .frame .text-wrapper-2 {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 120px;
   height: 30px;
   margin-top: -1px;
   font-family: "Montserrat", Helvetica;
-  font-weight: 400;
+  font-weight: 500;
   color: #1d4fd7;
   font-size: 16px;
   text-align: center;
   letter-spacing: 0;
   line-height: normal;
+}
+
+.frame .text-wrapper-2:hover{
+ font-weight: 700;
+ cursor: pointer;
 }
 
 .frame .overlap-group {
@@ -95,6 +103,17 @@
   left: 1171px;
   background-color: #e0e4ea;
   border-radius: 5px;
+}
+
+.frame .overlap-group input {
+  width: 363px;
+  height: 38px;
+  top: 8px;
+  left: 1171px;
+  padding: 0 40px 0 10px;
+  background-color: #e0e4ea;
+  border-radius: 5px;
+  border: none;
 }
 
 .frame .search {
