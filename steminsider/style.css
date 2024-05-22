@@ -1,0 +1,239 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-display: swap;
+}
+
+.main{
+    height: 100vh;
+}
+
+body .content{
+    padding: 0;
+    background: #EBF0FE;
+    
+}
+
+.column-shadow-right{
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.column-shadow-left{
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+header{
+    height: 40px;
+    background: #0A34A9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+}
+
+header h1{
+    color: #E5E5E3;
+    font-size: 1.5em;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+    padding: 0 10px;
+}
+
+header p{
+color: #E5E5E3;
+font-family: Montserrat;
+font-size: 1em;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+margin: 0;
+padding: 0 10px ;
+}
+
+.slideshow{
+    height: 300px;
+    background-color: grey;
+    overflow: hidden;
+    
+}
+
+.slide{
+    display: none;
+    
+    
+}
+
+.slideshow > .active{
+    display: block;
+}
+
+.slideshow h2{
+    background-color: #0A34A9;
+    color: #E5E5E3;
+    font-weight: 700;
+    position: absolute;
+    top: 140px;
+    width: 600px;
+    z-index: 5;
+    padding: 10px;
+    font-size: 22px;
+    box-shadow: 6px 6px 0px -2px rgb(255, 255, 255);
+
+}
+
+nav{
+    display: flex;
+    height: 40px;
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    background: #EBF0FE;
+    box-shadow: 0px 3px 8px -2px rgba(0, 0, 0, 0.25);
+}
+
+nav ul{
+    text-decoration: none;
+    list-style-type: none;
+    color: #0A34A9;
+    display: flex;
+    width: 60%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+nav .search_bar{
+    width: 30%;
+    border: 1px solid #0A34A9;
+    border-radius: 18px;
+    height: 70%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav .search{
+    width: 12%;
+    border: none;
+    background-color: transparent;
+    height: 90%;
+}
+
+nav .material-symbols-outlined{
+    color: #0A34A9;
+}
+
+.search_bar > input{
+    background-color: transparent;
+    margin-left: 4%;
+    border: none;
+    width: 83%;
+    height: 90%;
+    font-size: 12px;
+    caret-color: #007BFF;
+    outline: none;
+}
+
+nav li{
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease-in-out;
+}
+
+nav a{
+    text-decoration: none;
+    color: #0A34A9;
+    font-weight: 500;
+}
+
+nav li:hover{
+    border-bottom: 2px solid #0A34A9;
+    cursor: pointer;
+}
+
+.articles{
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+}
+
+.article{
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 47%;
+    border-radius: 5px;
+    margin: 20px 0;
+    background: #E5E5E3;
+    border: 0.5px solid #0A34A9;
+}
+
+.article-details{
+ width: 100%;
+ height: 10%;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+ font-weight: 700;
+}
+
+.article-details p{
+    font-size: 12px;
+    margin: 0;
+    padding: 0 10px;
+    color: #0A34A9;
+}
+
+.article img{
+    width: 100%;
+    height: 45%;
+    object-fit: cover;
+}
+
+.article-description{
+    width: 100%;
+    height: 45%;
+    
+}
+
+.article-title{
+    color: #D9D9D9;
+    background-color: #0A34A9;
+    font-size: 17px;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.article-description p{
+    color: #0A34A9;
+    font-size: 13px;
+    width: 100%;
+    text-align: left;
+    padding: 0px 10px 10px 10px;
+    font-weight: 500;
+}
+
+.article-description button{
+    background-color: transparent;
+    border: none;
+    font-weight: 700;
+    color: #0A34A9;
+}	
