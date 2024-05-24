@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 7</title>
+    <!-- Import biblioteki Paper.js -->
+    <script type="text/javascript" src="js/dist/paper-full.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../album/animations.html">Album - lab 2</a></li>
+                <li><a href="../gwd/album.html">GWD - lab 3</a></li>
+                <li><a href="../canvas/canvas.html">Canvas - lab 4</a></li>
+                <li class="menu_hover"><a href="#">Transformacje - lab 5</a>
+                    <ul class="dropdown_menu">
+                        <li><a href="../transformacje/zd1.html">zd 1</a></li>
+                        <li><a href="../transformacje/zd2.html">zd 2</a></li>
+                        <li><a href="../transformacje/zd3.html">zd 3</a></li>
+                        <li><a href="../transformacje/zd4.html">zd 4</a></li>
+                        <li><a href="../transformacje/zd5.html">zd 5</a></li>
+                    </ul>
+                </li>
+                <li><a href="../animacje/animacje.html">Animacje - lab 6</a></li>
+                <li><a href="../paperjs/paper_arkanoid.html">Biblioteki - lab 7</a></li>
+                <li class="menu_hover"><a href="#">Biblioteki2 - lab 8</a>
+                    <ul class="dropdown_menu">
+                        <li><a href="../wykresy/wykresy.html">funkcja 1</a></li>
+                        <li><a href="../wykresy/wykresy2.html">funkcja 2a</a></li>
+                        <li><a href="../wykresy/wykresy3.html">funkcja 2b</a></li>
+                        <li><a href="../wykresy/iris.html">Iris</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <canvas id="myCanvas" resize></canvas>
+    <script type="text/paperscript" canvas="myCanvas">
+        // Wymiary gry
+var w = 400, h = 600, ballSize = 10, brickW = 30, brickH = 20, batW = 100, batH = 20;
+var ballX, ballY, dx, dy, bricks = [], batX = w / 2, batY = h - 50;
+var rows = 4, cols = 10;
+
+// Ustawienia Canvas
+var background = new Path.Rectangle({
+    point: [0, 0],
+    size: [w, h],
+    fillColor: '#eee'
+});
+
+// Funkcja inicjalizacji gry
+function init() {
+    bricks = [];
+    ballX = w / 2;
+    ballY = h - 100;
+    dx = 2;
+    dy = -2;
+
+    for (var row = 0; row < rows; row++) {
+        bricks[row] = [];
+        for (var col = 0; col < cols; col++) {
+            if (col >= row && col < cols - row) {
+                var brick = new Path.Rectangle({
+                    point: [50 + col * brickW, 50 + row * brickH],
+                    size: [brickW, brickH],
+                    fillColor: 'green'
+                });
+                bricks[row][col] = brick;
+            } else {
+                bricks[row][col] = null;
+            }
+        }
+    }
+}
+
+// Tworzenie paletki
+var paddle = new Path.Rectangle({
+    point: [batX - batW / 2, batY],
+    size: [batW, batH],
+    fillColor: 'blue'
+});
+
+// Tworzenie piłki
+var ball = new Path.Circle({
+    center: [ballX, ballY],
+    radius: ballSize,
+    fillColor: 'red'
+});
+
+// Funkcja rysująca aktualny stan gry
+function draw() {
+    paddle.position.x = batX;
+    ball.position = new Point(ballX, ballY);
+}
+
+// Funkcja ruchu piłki
+function move() {
+    if (ballX - ballSize + dx < 0 || ballX + ballSize + dx > w) dx = -dx;
+    if (ballY - ballSize + dy < 0) dy = -dy;
+    if (ballY + ballSize > batY && ballX + ballSize > batX - batW / 2 && ballX - ballSize < batX + batW / 2) dy = -dy;
+    if (ballY + ballSize > h) return false; // Koniec gry, piłka spadła poniżej planszy
+
+    ballX += dx;
+    ballY += dy;
+
+    for (var row = 0; row < rows; row++) {
+        for (var col = 0; col < cols; col++) {
+            var brick = bricks[row][col];
+            if (brick && ballX + ballSize > brick.bounds.left && ballX - ballSize < brick.bounds.right && ballY + ballSize > brick.bounds.top && ballY - ballSize < brick.bounds.bottom) {
+                brick.remove();
+                bricks[row][col] = null;
+                dy = -dy;
+                break;
+            }
+        }
+    }
+    return true;
+}
+
+// Funkcja aktualizacji stanu gry
+function onFrame(event) {
+    if (!move()) {
+        alert('Game over!');
+        init();
+    }
+    draw();
+}
+
+// Ruch paletki za pomocą myszy
+function onMouseMove(event) {
+    batX = event.point.x;
+}
+
+// Inicjalizacja gry
+init();
+view.onFrame = onFrame;
+view.onMouseMove = onMouseMove;
+
+    </script>
+</body>
+</html>
