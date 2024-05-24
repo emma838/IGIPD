@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Puzzle Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #canvas-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.6.0/fabric.min.js"></script>
+    <script>
+        // Make sure Fabric.js is loaded before using it
+        if (typeof fabric !== 'undefined') {
+            const canvasContainer = document.getElementById('canvas-container');
+            const canvas = new fabric.Canvas(canvasContainer, {
+                selection: false
+            });
+
+            // Rest of your code here...
+        } else {
+            console.error('Fabric.js is not loaded');
+        }
+        const canvasContainer = document.getElementById('canvas-container');
+        const canvas = new fabric.Canvas(canvasContainer, {
+            selection: false
+        });
+
+        // Load the image and create puzzles pieces
+        const loadImage = (src) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => resolve(img);
+                img.onerror = (err) => reject(err);
+            });
+        };
+
+        loadImage('path/to/your/image.jpg')
+            .then((img) => {
+                const scale = 0.8;
+                const width = img.width * scale;
+                const height = img.height * scale;
+                const cols = 4;
+                const rows = 4;
+                const pieceWidth = width / cols;
+                const pieceHeight = height / rows;
+
+                const pieces = [];
+
+                for (let y = 0; y < rows; y++) {
+                    for (let x = 0; x < cols; x++) {
+                        const piece = new fabric.Rect({
+                            left: x * pieceWidth,
+                            top: y * pieceHeight,
+                            width: pieceWidth,
+                            height: pieceHeight,
+                            fill: 'white',
+                            selectable: false,
+                            originX: 'left',
+                            originY: 'top'
+                        });
+
+                        piece.image = new fabric.Image(img);
+                        piece.image.set({
+                            left: -x * pieceWidth,
+                            top: -y * pieceHeight,
+                            selectable: false,
+                            originX: 'left',
+                            originY: 'top'
+                        });
+
+                        piece.hasImage = true;
+                        pieces.push(piece);
+                        canvas.add(piece);
+                    }
+                }
+
+                canvas.setBackgroundImage(
+                    new fabric.Image(img),
+                    canvas.renderAll.bind(canvas),
+                    {
+                        scaleX: scale,
+                        scaleY: scale,
+                        selectable: false
+                    }
+                );
+
+                // Shuffle the pieces array and reposition the puzzle pieces
+                shuffleArray(pieces);
+                for (let i = 0; i < pieces.length; i++) {
+                    const piece = pieces[i];
+                    if (piece.hasImage) {
+                        piece.setLeft(Math.random() * (canvas.width - piece.image.width));
+                        piece.setTop(Math.random() * (canvas.height - piece.image.height));
+                    }
+                }
+
+                canvas.renderAll();
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
+        // Shuffle array implementation using Fisher-Yates (aka Knuth) algorithm
+        function shuffleArray(array) {
+            let currentIndex = array.length;
+            let temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (currentIndex !== 0) {
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+    </script>
+</body>
+</html>
