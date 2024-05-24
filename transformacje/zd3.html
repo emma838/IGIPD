@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- google fonts, icon -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <title>Lab 5</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../album/animations.html">Album - lab 2</a></li>
+                <li><a href="../gwd/album.html">GWD - lab 3</a></li>
+                <li><a href="../canvas/canvas.html">Canvas - lab 4</a></li>
+                <li class="menu_hover"><a href="#">Transformacje - lab 5</a>
+                    <ul class="dropdown_menu">
+                        <li><a href="../transformacje/zd1.html">zd 1</a></li>
+                        <li><a href="../transformacje/zd2.html">zd 2</a></li>
+                        <li><a href="../transformacje/zd3.html">zd 3</a></li>
+                        <li><a href="../transformacje/zd4.html">zd 4</a></li>
+                        <li><a href="../transformacje/zd5.html">zd 5</a></li>
+                    </ul>
+                </li>
+                <li><a href="../animacje/animacje.html">Animacje - lab 6</a></li>
+                <li><a href="../paperjs/paper_arkanoid.html">Biblioteki - lab 7</a></li>
+                <li class="menu_hover"><a href="#">Biblioteki2 - lab 8</a>
+                    <ul class="dropdown_menu">
+                        <li><a href="../wykresy/wykresy.html">funkcja 1</a></li>
+                        <li><a href="../wykresy/wykresy2.html">funkcja 2a</a></li>
+                        <li><a href="../wykresy/wykresy3.html">funkcja 2b</a></li>
+                        <li><a href="../wykresy/iris.html">Iris</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="canvases">
+    <canvas id="zd3" width="600" height="600" ></canvas>
+    <script>
+window.onload = function() {
+    var canvas = document.getElementById('zd3');
+    var context = canvas.getContext('2d');
+
+    // Deklaracja zmiennych podlegających zmianie podczas całej animacji
+    var last_time, stop;
+    var ball = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        radius: 20,
+        dx: 2,
+        dy: 3
+    };
+
+    // Inicjalizacja stanu początkowego animacji
+    function InitAnimation() {
+        stop = false;
+        var date = new Date();
+        last_time = date.getTime();
+        // Uruchomienie animacji
+        window.requestAnimationFrame(drawAnimation);
+    }
+
+    // Główna funkcja rysująca kolejne klatki animacji
+    function drawAnimation() {
+        // 1. Czyszczenie całego płótna
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 2. Wyznaczenie upływu czasu od ostatniej klatki
+        var date = new Date();
+        var time_interval = date.getTime() - last_time;
+
+        // 3. Wyznaczenie nowego stanu rysowanych obiektów
+        ball.x += ball.dx;
+        ball.y += ball.dy;
+
+        // Sprawdzenie kolizji z krawędziami Canvas
+        if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+            ball.dx = -ball.dx;
+        }
+        if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+            ball.dy = -ball.dy;
+        }
+
+        // 4. Rysowanie obiektu
+        context.beginPath();
+        context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        context.fillStyle = '#0095DD';
+        context.fill();
+        context.closePath();
+
+        // 5. Ponowne wywołanie pętli animacji
+        last_time = date.getTime();
+        if (!stop) window.requestAnimationFrame(drawAnimation);
+    }
+
+    // Rozpoczęcie animacji
+    InitAnimation();
+}
+
+    </script>
+    </div>
+    
+    
+</body>
+</html>
