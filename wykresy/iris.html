@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Iris</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        #plot-container {
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../album/animations.html">Album - lab 2</a></li>
+                <li><a href="../gwd/album.html">GWD - lab 3</a></li>
+                <li><a href="../canvas/canvas.html">Canvas - lab 4</a></li>
+                <li class="menu_hover"><a href="#">Transformacje - lab 5</a>
+                    <ul class="dropdown_menu">
+                        <li><a href="../transformacje/zd1.html">zd 1</a></li>
+                        <li><a href="../transformacje/zd2.html">zd 2</a></li>
+                        <li><a href="../transformacje/zd3.html">zd 3</a></li>
+                        <li><a href="../transformacje/zd4.html">zd 4</a></li>
+                        <li><a href="../transformacje/zd5.html">zd 5</a></li>
+                    </ul>
+                </li>
+                <li><a href="../animacje/animacje.html">Animacje - lab 6</a></li>
+                <li><a href="../paperjs/paper_arkanoid.html">Biblioteki - lab 7</a></li>
+                <li class="menu_hover"><a href="#">Biblioteki2 - lab 8</a>
+                    <ul class="dropdown_menu">
+                        <li><a href="../wykresy/wykresy.html">funkcja 1</a></li>
+                        <li><a href="../wykresy/wykresy2.html">funkcja 2a</a></li>
+                        <li><a href="../wykresy/wykresy3.html">funkcja 2b</a></li>
+                        <li><a href="../wykresy/iris.html">Iris</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="plot-container"></div>
+
+    <script>
+        fetch('iris.json')
+            .then(response => response.json())
+            .then(irisData => {
+                const sepalLength = [];
+                const sepalWidth = [];
+                const petalLength = [];
+                const petalWidth = [];
+                const classes = [];
+                const colors = [];
+
+                const colorMapping = {
+                    'setosa': 'red',
+                    'versicolor': 'blue',
+                    'virginica': 'green'
+                };
+
+                irisData.forEach(record => {
+                    sepalLength.push(parseFloat(record.sepal_length));
+                    sepalWidth.push(parseFloat(record.sepal_width));
+                    petalLength.push(parseFloat(record.petal_length));
+                    petalWidth.push(parseFloat(record.petal_width));
+                    classes.push(record.class);
+                    colors.push(colorMapping[record.class]);
+                });
+
+                const data = [{
+                    x: sepalLength,
+                    y: sepalWidth,
+                    z: petalLength,
+                    mode: 'markers',
+                    marker: {
+                        color: colors,
+                        size: petalWidth.map(size => size * 5),
+                        symbol: 'circle'
+                    },
+                    type: 'scatter3d',
+                    hovertemplate: '<b>Sepal Length</b>: %{x}<br>' +
+                                   '<b>Sepal Width</b>: %{y}<br>' +
+                                   '<b>Petal Length</b>: %{z}<br>' +
+                                   '<b>Petal Width</b>: %{marker.size}<br>' +
+                                   '<b>Class</b>: %{marker.color}<extra></extra>'
+                }];
+
+                const layout = {
+                    scene: {
+                        xaxis: { title: 'Sepal Length' },
+                        yaxis: { title: 'Sepal Width' },
+                        zaxis: { title: 'Petal Length' }
+                    },
+                    title: 'Iris Data 3D Scatter Plot'
+                };
+
+                Plotly.newPlot('plot-container', data, layout);
+            });
+    </script>
+</body>
+</html>

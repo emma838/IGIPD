@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Wykres funkcji jednowymiarowej</title>
+    <!-- Dodaj link do biblioteki Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas{
+
+width:1000px !important;
+height:600px !important;
+
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../album/animations.html">Album - lab 2</a></li>
+                <li><a href="../gwd/album.html">GWD - lab 3</a></li>
+                <li><a href="../canvas/canvas.html">Canvas - lab 4</a></li>
+                <li class="menu_hover"><a href="#">Transformacje - lab 5</a>
+                    <ul class="dropdown_menu">
+                        <li><a href="../transformacje/zd1.html">zd 1</a></li>
+                        <li><a href="../transformacje/zd2.html">zd 2</a></li>
+                        <li><a href="../transformacje/zd3.html">zd 3</a></li>
+                        <li><a href="../transformacje/zd4.html">zd 4</a></li>
+                        <li><a href="../transformacje/zd5.html">zd 5</a></li>
+                    </ul>
+                </li>
+                <li><a href="../animacje/animacje.html">Animacje - lab 6</a></li>
+                <li><a href="../paperjs/paper_arkanoid.html">Biblioteki - lab 7</a></li>
+                <li class="menu_hover"><a href="#">Biblioteki2 - lab 8</a>
+                    <ul class="dropdown_menu">
+                        <li><a href="../wykresy/wykresy.html">funkcja 1</a></li>
+                        <li><a href="../wykresy/wykresy2.html">funkcja 2a</a></li>
+                        <li><a href="../wykresy/wykresy3.html">funkcja 2b</a></li>
+                        <li><a href="../wykresy/iris.html">Iris</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Dane funkcji
+        const xValues = Array.from({ length: 50 }, (_, i) => -2 + i * 0.08); // Zakres [-2, 2]
+        const yValues = xValues.map(x => Math.pow(x, 2) - 10 * Math.cos(2 * Math.PI * x) + 10);
+
+        // Konfiguracja wykresu
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: 'f(x)',
+                    data: yValues,
+                    borderColor: 'blue',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'x'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'f(x)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
