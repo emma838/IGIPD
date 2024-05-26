@@ -1,0 +1,43 @@
+body{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+.photos{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #c9c9c9;
+}
+
+.photos img{
+    cursor: pointer;
+    padding: 30px 10px;
+    transition: transform 0.3s ease;
+}
+
+.large-photos{
+    display: none;
+    width: 70%;
+    margin: 10px;
+    
+}
+
+#img-large{
+    width: 80%;
+    position: relative;
+    margin: 10vh auto;
+    opacity: 0; /* Ustawiamy początkową wartość przezroczystości na 0 */
+    animation: fadeIn 0.5s ease forwards; /* Dodajemy animację fade-in */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
